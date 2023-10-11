@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/', /*withAuth,*/ async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
@@ -15,7 +15,7 @@ router.post('/', withAuth, async (req, res) => {
     }
 })
 
-router.post('/:id', withAuth, async (req, res) => {
+router.post('/:id', /*withAuth,*/ async (req, res) => {
     try {
         const newComment = await Comment.create({
             ...req.body,
@@ -30,28 +30,36 @@ router.post('/:id', withAuth, async (req, res) => {
     }
 })
 
-router.put('/:id', withAuth(), async (req, res) => {
+router.put('/:id', /*withAuth,*/ async (req, res) => {
     try {
-        await Post.update(req.body, {
+        // Update the Post with the given ID using req.body data
+        const [rowsUpdated, [updatedPost]] = await Post.update(req.body, {
             where: {
                 id: req.params.id,
-            }
-        })
+            },
+            returning: true, // This is required to get the updated row
+        });
 
-        const updatedPostData = await Product.findByPk(req.params.id, {
+        if (rowsUpdated === 0) {
+            // If no rows were updated, the post with the given ID doesn't exist
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Fetch the updated post data with associated User and Comment models
+        const updatedPostData = await Post.findByPk(req.params.id, {
             include: [
                 { model: User },
-                { model: Comment }
+                { model: Comment },
             ],
         });
 
-        res.status(200).json(updatedPostData)
+        res.status(200).json(updatedPostData);
     } catch (err) {
         res.status(500).json(err);
     }
-})
+});
 
-router.delete('/:id', withAuth(), async (req, res) => {
+router.delete('/:id', /*withAuth,*/ async (req, res) => {
     try {
         const postData = await Post.destroy({
             where: {
