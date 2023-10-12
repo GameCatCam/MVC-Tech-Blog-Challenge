@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', /*withAuth,*/ async (req, res) => {
+router.post('/', withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
@@ -15,7 +15,7 @@ router.post('/', /*withAuth,*/ async (req, res) => {
     }
 })
 
-router.post('/:id', /*withAuth,*/ async (req, res) => {
+router.post('/:id', withAuth, async (req, res) => {
     try {
         const newComment = await Comment.create({
             ...req.body,
@@ -30,7 +30,7 @@ router.post('/:id', /*withAuth,*/ async (req, res) => {
     }
 })
 
-router.put('/:id', /*withAuth,*/ async (req, res) => {
+router.put('/:id', withAuth, async (req, res) => {
     try {
         // Update the Post with the given ID using req.body data
         const [rowsUpdated, [updatedPost]] = await Post.update(req.body, {
@@ -59,7 +59,7 @@ router.put('/:id', /*withAuth,*/ async (req, res) => {
     }
 });
 
-router.delete('/:id', /*withAuth,*/ async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({
             where: {

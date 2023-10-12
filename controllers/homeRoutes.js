@@ -36,7 +36,8 @@ router.get('/post/:id', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['user_id', 'content'],
+          attributes: ['content'],
+          include: [User]
         },
       ],
     });
@@ -61,7 +62,7 @@ router.get('/profile', withAuth, async (req, res) => {
       include: [
         {
           model: Post,
-          attributes: ['name', 'content', 'date_created']
+          attributes: ['id', 'name', 'content', 'date_created']
         }
       ],
     });
