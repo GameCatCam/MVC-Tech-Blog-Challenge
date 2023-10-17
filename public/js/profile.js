@@ -17,30 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (response.ok) {
         document.location.replace('/profile');
       } else {
-        alert('Failed to create project');
-      }
-    }
-  };
-
-  const newCommentHandler = async (event) => {
-    event.preventDefault();
-
-    const content = document.querySelector('#comment-text').value.trim();
-    const post_id = event.target.getAttribute('data-id')
-
-    if (content && post_id) {
-      const response = await fetch(`/api/post/${post_id}`, {
-        method: 'POST',
-        body: JSON.stringify({ content, post_id }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        document.location.replace(`/post/${post_id}`);
-      } else {
-        alert('Failed to create comment');
+        alert('Failed to create post');
       }
     }
   };
@@ -48,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const delButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
+      console.log(id)
 
       const response = await fetch(`/api/post/${id}`, {
         method: 'DELETE',
@@ -67,7 +45,4 @@ document.addEventListener('DOMContentLoaded', function() {
   document
     .querySelector('.post-list')
     .addEventListener('click', delButtonHandler);
-  document
-    .querySelector('.new-comment-form')
-    .addEventListener('submit', newCommentHandler);
 })
