@@ -1,0 +1,82 @@
+:root {
+    --color1: #190482;
+    --color2: #7752FE;
+    --color3: #8E8FFA;
+    --color4: #C2D9FF;
+}
+
+body, html {
+    color: black;
+    background-color: var(--color4);
+    max-height: fit-content;
+}
+
+header {
+    background-color: var(--color2);
+
+}
+
+nav {
+    background-color: var(--color1);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: black 8px 8px;
+}
+
+.project {
+    background-color: var(--color3);
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.header-logo {
+    background-color: var(--color1);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: black 8px 8px;
+}
+
+.links {
+    color: white;
+}
+
+.user-info {
+    background-color: var(--color2);
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.posts {
+    background-color: var(--color3);
+    border-radius: 8px;
+}
+
+.update {
+    color: black;
+    background-color: yellow;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.post-header {
+    width: 100%;
+    background-color: var(--color2);
+}
+
+.comment-list {
+    background-color: var(--color3);
+}
+
+.comments {
+    background-color: var(--color2);
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 500px) {
+    .header-logo {
+        font-size: medium
+    }
+    .nav-bar {
+        font-size: small;
+    }
+}
