@@ -1,4 +1,4 @@
-# E-Commerce Back End Challenge [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+# Tech Blog MVC Challenge [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
 
 ## Description
 
